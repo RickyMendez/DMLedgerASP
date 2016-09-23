@@ -20,6 +20,10 @@ namespace DMLedgerASP.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
+        public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
+        public DbSet<Bill> Bills { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

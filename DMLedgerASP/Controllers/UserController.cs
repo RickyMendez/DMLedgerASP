@@ -3,23 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DMLedgerASP.Models;
+using DMLedgerASP.ViewModels;
 
 namespace DMLedgerASP.Controllers
 {
-    [AllowAnonymous]
-    public class HomeController : Controller
+    public class UserController : Controller
     {
+        // GET: User
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            return View();
-        }
-
-        public ActionResult Contact()
         {
             return View();
         }
