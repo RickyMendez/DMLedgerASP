@@ -7,7 +7,6 @@ using System.Web.Http;
 using DMLedgerASP.Dtos;
 using DMLedgerASP.Models;
 using AutoMapper;
-using System.Web.Mvc;
 
 namespace DMLedgerASP.Controllers.Api
 {
@@ -37,21 +36,21 @@ namespace DMLedgerASP.Controllers.Api
             return Ok(Mapper.Map<BankAccount, BankAccountsDto>(bankAccount));
         }
         // POST api/bankaccounts
-        [System.Web.Http.HttpPost]
-        public BankAccountsDto CreateBankAccount(BankAccountsDto bankAccountDto)
+        [HttpPost]
+        public IHttpActionResult CreateBankAccount(BankAccountsDto bankAccountDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             var bankAccount = Mapper.Map<BankAccountsDto, BankAccount>(bankAccountDto);
             _context.BankAccounts.Add(bankAccount);
             _context.SaveChanges();
             bankAccountDto.Id = bankAccount.Id;
-            return bankAccountDto;
+            return Created(new Uri(Request.RequestUri + "/" + bankAccount.Id),bankAccountDto);
         }
 
         // PUT api/bankaccounts/{id}
-        [System.Web.Http.HttpPut]
+        [HttpPut]
         public void UpdateBankAccount(int id, BankAccountsDto bankAccountDto)
         {
             if (!ModelState.IsValid)
@@ -67,7 +66,7 @@ namespace DMLedgerASP.Controllers.Api
             _context.SaveChanges();
         }
         // DELETE api/bankaccounts/{id}
-        [System.Web.Http.HttpDelete]
+        [HttpDelete]
         public void DeleteBankAccount(int id)
         {
             var bankAccountInDb = _context.BankAccounts.SingleOrDefault(c => c.Id == id);

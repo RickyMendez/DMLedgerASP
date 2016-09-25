@@ -1,7 +1,22 @@
-﻿
+﻿@model DMLedgerASP.ViewModels.UserAccountDataViewModel
 @{
     ViewBag.Title = "User";
 }
 
-<h2>Hello</h2>
+@if (Model.UserData == null)
+{
+    using (Html.BeginForm("AddNew", "User"))
+    {
+        <h2>Let's get started!</h2>
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserData.NewItemTypeId)
+            @Html.DropDownListFor(m => m.UserData.NewItemTypeId,
+             new SelectList(Model.NewItemTypes, "Id", "ItemName"),
+             "Selcect new item",
+             new { @class = "form-control" })
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    }
+}
+
 

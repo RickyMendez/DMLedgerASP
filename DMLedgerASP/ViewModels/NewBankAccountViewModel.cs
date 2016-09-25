@@ -6,9 +6,8 @@ using DMLedgerASP.Models;
 
 namespace DMLedgerASP.ViewModels
 {
-    public class UserAccountDataViewModel
+    public class NewBankAccountViewModel
     {
-        public IEnumerable<NewItemType> NewItemTypes { get; set; }
-        public UserData UserData { get; set; }
+        public BankAccount  BankAccount{ get; set; }
     }
 }

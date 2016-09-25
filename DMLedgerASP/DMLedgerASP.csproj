@@ -218,6 +218,9 @@
     <Compile Include="Controllers\Api\BillsController.cs" />
     <Compile Include="Controllers\Api\CrediCardsController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
+    <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\BillController.cs" />
+    <Compile Include="Controllers\CreditCardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -244,6 +247,18 @@
     <Compile Include="Migrations\201609220344304_AddBillsDbSet.Designer.cs">
       <DependentUpon>201609220344304_AddBillsDbSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609240154195_RemoveBankAccountDueDate.cs" />
+    <Compile Include="Migrations\201609240154195_RemoveBankAccountDueDate.Designer.cs">
+      <DependentUpon>201609240154195_RemoveBankAccountDueDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609242105093_AddNewItemTypes.cs" />
+    <Compile Include="Migrations\201609242105093_AddNewItemTypes.Designer.cs">
+      <DependentUpon>201609242105093_AddNewItemTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609242106305_PopulateNewItemTypes.cs" />
+    <Compile Include="Migrations\201609242106305_PopulateNewItemTypes.Designer.cs">
+      <DependentUpon>201609242106305_PopulateNewItemTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -251,10 +266,13 @@
     <Compile Include="Models\CreditCard.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NewItemType.cs" />
     <Compile Include="Models\UserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\BillViewModel.cs" />
+    <Compile Include="ViewModels\NewBillViewModel.cs" />
+    <Compile Include="ViewModels\NewBankAccountViewModel.cs" />
+    <Compile Include="ViewModels\NewCreditCardViewModel.cs" />
     <Compile Include="ViewModels\UserAccountDataViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -319,6 +337,9 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\BankAccount\BankAccountForm.cshtml" />
+    <Content Include="Views\Bill\BillForm.cshtml" />
+    <Content Include="Views\CreditCard\CreditCardForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -343,6 +364,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609220344304_AddBillsDbSet.resx">
       <DependentUpon>201609220344304_AddBillsDbSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609240154195_RemoveBankAccountDueDate.resx">
+      <DependentUpon>201609240154195_RemoveBankAccountDueDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609242105093_AddNewItemTypes.resx">
+      <DependentUpon>201609242105093_AddNewItemTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609242106305_PopulateNewItemTypes.resx">
+      <DependentUpon>201609242106305_PopulateNewItemTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

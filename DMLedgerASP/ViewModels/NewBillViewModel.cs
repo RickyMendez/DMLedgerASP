@@ -6,8 +6,8 @@ using DMLedgerASP.Models;
 
 namespace DMLedgerASP.ViewModels
 {
-    public class BillViewModel
+    public class NewBillViewModel
     {
-        public List<Bill> Bills { get; set; }
+        public Bill Bill { get; set; }
     }
 }

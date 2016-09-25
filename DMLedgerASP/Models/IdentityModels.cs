@@ -22,8 +22,13 @@ namespace DMLedgerASP.Models
     {
 
         public DbSet<BankAccount> BankAccounts { get; set; }
+
         public DbSet<CreditCard> CreditCards { get; set; }
+
         public DbSet<Bill> Bills { get; set; }
+
+        public DbSet<NewItemType> NewItemTypes { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

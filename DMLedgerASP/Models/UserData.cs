@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DMLedgerASP.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DMLedgerASP.Models
 {
@@ -13,5 +14,10 @@ namespace DMLedgerASP.Models
         public Bill bills { get; set; }
 
         public CreditCard creditCards { get; set; }
+
+        public NewItemType NewItemType { get; set; }
+
+        [Display (Name = "New Item")]
+        public byte NewItemTypeId { get; set; }
     }
 }
