@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using DMLedgerASP.ViewModels;
 
 namespace DMLedgerASP.Controllers
 {
@@ -11,7 +13,10 @@ namespace DMLedgerASP.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.GetUserId() == null)
+                return View();
+
+            return RedirectToAction("Index", "User");
         }
 
         public ActionResult About()

@@ -1,22 +1,65 @@
-﻿@model DMLedgerASP.ViewModels.UserAccountDataViewModel
-@{
+﻿@{
     ViewBag.Title = "User";
 }
 
-@if (Model.UserData == null)
+<h2>Ledger</h2>
+<table id="userData" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Limit</th>
+            <th>Payment Date</th>
+            <th>Payment Amount</th>
+            <th>Balance</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts
 {
-    using (Html.BeginForm("AddNew", "User"))
-    {
-        <h2>Let's get started!</h2>
-        <div class="form-group">
-            @Html.LabelFor(m => m.UserData.NewItemTypeId)
-            @Html.DropDownListFor(m => m.UserData.NewItemTypeId,
-             new SelectList(Model.NewItemTypes, "Id", "ItemName"),
-             "Selcect new item",
-             new { @class = "form-control" })
-        </div>
-        <button type="submit" class="btn btn-primary">Add</button>
-    }
+    <script>
+        $(document).ready(function () {
+            var table = $("#userData").DataTable({
+                ajax: {
+                    url: "/api/Users",
+                    dataSrc: ""
+                },
+
+                columns: [
+                    {
+                        data: "name",
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-customer-id" + data + ">Delete</button>"
+                        }
+                    },
+                ]
+            });
+        });
+    </script>
 }
 
 
