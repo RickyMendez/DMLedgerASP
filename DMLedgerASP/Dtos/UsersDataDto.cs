@@ -8,10 +8,10 @@ namespace DMLedgerASP.Dtos
 {
     public class UsersDataDto
     {
-        public BankAccountsDto bankAccounts { get; set; }
+        public IEnumerable<BankAccountsDto> BankAccounts { get; set; }
 
-        public BillsDto bills { get; set; }
+        public IEnumerable<BillsDto> Bills { get; set; }
 
-        public CreditCardsDto creditCards { get; set; }
+        public IEnumerable<CreditCardsDto> CreditCards { get; set; }
     }
 }

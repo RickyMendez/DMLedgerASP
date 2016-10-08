@@ -9,11 +9,11 @@ namespace DMLedgerASP.Models
 {
     public class UserData
     {
-        public BankAccount bankAccounts { get; set; }
+        public IEnumerable<BankAccount> BankAccounts { get; set; }
 
-        public Bill bills { get; set; }
+        public IEnumerable<Bill> Bills { get; set; }
 
-        public CreditCard creditCards { get; set; }
+        public IEnumerable<CreditCard> CreditCards { get; set; }
 
         public NewItemType NewItemType { get; set; }
 

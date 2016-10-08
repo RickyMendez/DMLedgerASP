@@ -12,17 +12,20 @@ namespace DMLedgerASP.App_Start
     {
         public MappingProfile()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<CreditCard, CreditCardsDto>());
-            Mapper.Initialize(cfg => cfg.CreateMap<CreditCardsDto, CreditCard>());
+            CreateMap<BankAccount, BankAccountsDto>();
+            CreateMap<BankAccountsDto, BankAccount>();
 
-            Mapper.Initialize(cfg => cfg.CreateMap<Bill, BillsDto>());
-            Mapper.Initialize(cfg => cfg.CreateMap<BillsDto, Bill>());
+            CreateMap<Bill, BillsDto>();
+            CreateMap<BillsDto, Bill>();
 
-            Mapper.Initialize(cfg => cfg.CreateMap<BankAccount, BankAccountsDto>());
-            Mapper.Initialize(cfg => cfg.CreateMap<BankAccountsDto, BankAccount>());
+            CreateMap<CreditCard, CreditCardsDto>();
+            CreateMap<CreditCardsDto, CreditCard>();
 
-            Mapper.Initialize(cfg => cfg.CreateMap<UserData, UsersDataDto>());
-            Mapper.Initialize(cfg => cfg.CreateMap<UsersDataDto, UserData>());
+            CreateMap<UserData, UsersDataDto>();
+            CreateMap<UsersDataDto, UserData>();
+
+            CreateMap<NewItemType, NewItemTypesDto>();
+            CreateMap<NewItemTypesDto, NewItemType>();
         }
     }
 }

@@ -25,7 +25,11 @@ namespace DMLedgerASP.Controllers
         // GET: user
         public ActionResult Index()
         {
-            return View();
+            var viewModel = new UserAccountDataViewModel()
+            {
+                NewItemTypes = _context.NewItemTypes
+            };
+            return View(viewModel);
         }
 
         [HttpPost]

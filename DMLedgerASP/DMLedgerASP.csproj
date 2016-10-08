@@ -217,6 +217,7 @@
     <Compile Include="Controllers\Api\BankAccountsController.cs" />
     <Compile Include="Controllers\Api\BillsController.cs" />
     <Compile Include="Controllers\Api\CrediCardsController.cs" />
+    <Compile Include="Controllers\Api\NewItemTypesController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\BillController.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Dtos\BankAccountsDto.cs" />
     <Compile Include="Dtos\BillsDto.cs" />
     <Compile Include="Dtos\CreditCardsDto.cs" />
+    <Compile Include="Dtos\NewItemTypesDto.cs" />
     <Compile Include="Dtos\UsersDataDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -258,6 +260,10 @@
     <Compile Include="Migrations\201609242106305_PopulateNewItemTypes.cs" />
     <Compile Include="Migrations\201609242106305_PopulateNewItemTypes.Designer.cs">
       <DependentUpon>201609242106305_PopulateNewItemTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610021931020_AddNewItemTypeToModels.cs" />
+    <Compile Include="Migrations\201610021931020_AddNewItemTypeToModels.Designer.cs">
+      <DependentUpon>201610021931020_AddNewItemTypeToModels.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -603,6 +609,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609242106305_PopulateNewItemTypes.resx">
       <DependentUpon>201609242106305_PopulateNewItemTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610021931020_AddNewItemTypeToModels.resx">
+      <DependentUpon>201610021931020_AddNewItemTypeToModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

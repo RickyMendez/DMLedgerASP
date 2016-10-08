@@ -19,6 +19,11 @@ namespace DMLedgerASP.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         // GET api/bankaccounts
         public IEnumerable<BankAccountsDto> GetBankAccounts()
         {
@@ -46,6 +51,8 @@ namespace DMLedgerASP.Controllers.Api
             _context.BankAccounts.Add(bankAccount);
             _context.SaveChanges();
             bankAccountDto.Id = bankAccount.Id;
+            bankAccountDto.NewItemTypeId = bankAccount.NewItemTypeId;
+
             return Created(new Uri(Request.RequestUri + "/" + bankAccount.Id),bankAccountDto);
         }
 

@@ -13,8 +13,13 @@ namespace DMLedgerASP
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/bootbox.js",
                         "~/Scripts/respond.js",
-                        "~/Sripts/dataTables/jquery.dataTables.js",
-                        "~/Sripts/dataTables/dataTables.bootstrap.js"));
+                        "~/Scripts/DataTables/jquery.dataTables.js",
+                        "~/Scripts/DataTables/dataTables.bootstrap.js",
+                        "~/Scripts/MyScripts/_tables.js",
+                        "~/Scripts/MyScripts/bank_account_form.js",
+                        "~/Scripts/MyScripts/creditcard_form.js",
+                        "~/Scripts/MyScripts/bill_form.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -29,7 +34,7 @@ namespace DMLedgerASP
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-slate.css",
                       "~/Content/site.css",
-                      "~/Content/dataTables/css/dataTables.bootstrap.css"));
+                      "~/Content/DataTables/css/dataTables.bootstrap.css"));
         }
     }
 }

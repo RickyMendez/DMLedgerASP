@@ -14,5 +14,7 @@ namespace DMLedgerASP.Models
         public string Name { get; set; }
 
         public double Balance { get; set; }
+        
+        public byte NewItemTypeId { get; set; }
     }
 }
