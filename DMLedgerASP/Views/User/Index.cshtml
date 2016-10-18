@@ -1,4 +1,4 @@
-﻿@model DMLedgerASP.ViewModels.UserAccountDataViewModel
+﻿
 @{
     ViewBag.Title = "User";
 }
@@ -6,7 +6,22 @@
 <h2>Ledger</h2>
 
 <h3>Bank Accounts</h3>
-<form id="addBank" class="form-control form-inline"></form>
+
+<!-- Add new bank account to table, start of SPA development -->
+<label>Add New Bank Account</label>
+<form class="form-inline" id="newBank">
+    <div class="form-group">
+        <label>Bank</label>
+        <input id="bankName" name="bankName" required type="text" value="" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Balance</label>
+        <input id="bankBalance" name="bankBalance" required type="text" value="" class="form-control" />
+    </div>
+    <button type="submit" id="bankSubmit" class="btn btn-primary">Add</button>
+</form><br />
+
+<!-- Bank Accounts Table -->
 <table id="accounts" class="display table table-bordered table-hover">
     <thead>
         <tr>
@@ -18,6 +33,34 @@
 </table>
 
 <h3>Credit Cards</h3>
+
+<!-- Add new Credit Card to table, second table -->
+<label>Add New Creidt Card</label>
+<form class="form-inline" id="newCreditCard">
+    <div class="form-group">
+        <label>Credit Card</label>
+        <input id="creditCardName" name="creditCardName" required type="text" value="" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Limit</label>
+        <input id="creditCardLimit" name="creditCardLimit" type="text" value="" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Balance</label>
+        <input id="creditCardBalance" name="creditCardBalance" required type="text" value="" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Payment Amount</label>
+        <input id="creditCardPayment" name="creditCardPayment" required type="text" value="" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Due Date</label>
+        <input id="creditCardDue" name="creditCardDue" required type="text" value="" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form><br />
+
+<!-- Credit Card Table -->
 <table id="creditcards" class="display table table-bordered table-hover">
     <thead>
         <tr>
@@ -32,6 +75,26 @@
 </table>
 
 <h3>Bills</h3>
+
+<!-- Add new Bill to table, third table -->
+<label>Add New Bill</label>
+<form class="form-inline" id="newBill">
+    <div class="form-group">
+        <label>Bill</label>
+        <input id="billName" name="billName" required type="text" value="" class="form-control" />
+    </div>/>
+    <div class="form-group">
+        <label>Payment Amount</label>
+        <input id="billPayment" name="billPayment" required type="text" value="" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Due Date</label>
+        <input id="billDue" name="billDue" required type="text" value="" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form><br />
+
+<!-- Bills Table -->
 <table id="bills" class="display table table-bordered table-hover">
     <thead>
         <tr>
@@ -45,12 +108,15 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/services")
     <script>
         $(document).ready(function () {
+            // Generate datatables for bank accounts, credit cards, and bills
             var account_table = $("#accounts").DataTable({
                 ajax: {
                     url: "/api/users",
-                    dataSrc: "bankAccounts"
+                    dataSrc: "bankAccounts",
+                    serverSide: true
                 },
                 columns: [
                     {
@@ -127,6 +193,21 @@
                 ]
             });
 
+            // Post new bank account using jquery and ajax
+            
+            var bankForm = $("#newBank").submit(function (e) {
+
+                e.preventDefault();
+
+                var bankModel = {
+                    Name: $("#newBank").find($("#bankName")).val(),
+                    Balance: $("#newBank").find($("#bankBalance")).val()
+                };
+
+                addHelper("/api/BankAccounts/CreateBankAccount", bankModel, account_table, bankForm);
+            });
+            
+            // Delete button for bank account table items
             $("#accounts").on("click", ".js-delete", function () {
                 var button = $(this);
 

@@ -10,6 +10,7 @@ using AutoMapper;
 
 namespace DMLedgerASP.Controllers.Api
 {
+    [RoutePrefix("/api/bankaccounts")]
     public class BankAccountsController : ApiController
     {
         private ApplicationDbContext _context;
@@ -42,7 +43,7 @@ namespace DMLedgerASP.Controllers.Api
         }
         // POST api/bankaccounts
         [HttpPost]
-        public IHttpActionResult CreateBankAccount(BankAccountsDto bankAccountDto)
+        public IHttpActionResult CreateBankAccount([FromBody]BankAccountsDto bankAccountDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -51,7 +52,6 @@ namespace DMLedgerASP.Controllers.Api
             _context.BankAccounts.Add(bankAccount);
             _context.SaveChanges();
             bankAccountDto.Id = bankAccount.Id;
-            bankAccountDto.NewItemTypeId = bankAccount.NewItemTypeId;
 
             return Created(new Uri(Request.RequestUri + "/" + bankAccount.Id),bankAccountDto);
         }

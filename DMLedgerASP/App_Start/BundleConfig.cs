@@ -15,16 +15,16 @@ namespace DMLedgerASP
                         "~/Scripts/respond.js",
                         "~/Scripts/DataTables/jquery.dataTables.js",
                         "~/Scripts/DataTables/dataTables.bootstrap.js",
-                        "~/Scripts/MyScripts/_tables.js",
-                        "~/Scripts/MyScripts/bank_account_form.js",
-                        "~/Scripts/MyScripts/creditcard_form.js",
-                        "~/Scripts/MyScripts/bill_form.js"));
+                        "~/Scripts/toastr.js"));
 
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-        
+            bundles.Add(new ScriptBundle("~/bundles/services").Include(
+                        "~/Scripts/MyScripts/userServices.js"));
+
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -34,7 +34,8 @@ namespace DMLedgerASP
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-slate.css",
                       "~/Content/site.css",
-                      "~/Content/DataTables/css/dataTables.bootstrap.css"));
+                      "~/Content/DataTables/css/dataTables.bootstrap.css",
+                      "~/Content/toastr.css"));
         }
     }
 }

@@ -13,10 +13,7 @@ namespace DMLedgerASP.Dtos
         [Required]
         public string Name { get; set; }
 
+        [Required]
         public double Balance { get; set; }
-
-        public string DueDate { get; set; }
-
-        public byte NewItemTypeId { get; set; }
     }
 }
