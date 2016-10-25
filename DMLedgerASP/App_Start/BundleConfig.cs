@@ -22,7 +22,8 @@ namespace DMLedgerASP
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/services").Include(
-                        "~/Scripts/MyScripts/userServices.js"));
+                        "~/Scripts/MyScripts/userServices.js",
+                        "~/Scripts/DataTables/dataTables.editCell.js"));
 
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

@@ -13,8 +13,8 @@ namespace DMLedgerASP.Models
         [Required]
         public string Name { get; set; }
 
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString ="{0:C}")]
         public double Balance { get; set; }
-        
-        public byte NewItemTypeId { get; set; }
     }
 }

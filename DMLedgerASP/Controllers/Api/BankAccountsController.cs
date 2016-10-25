@@ -58,7 +58,7 @@ namespace DMLedgerASP.Controllers.Api
 
         // PUT api/bankaccounts/{id}
         [HttpPut]
-        public void UpdateBankAccount(int id, BankAccountsDto bankAccountDto)
+        public void UpdateBankAccount(int id, [FromBody] BankAccountsDto bankAccountDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);

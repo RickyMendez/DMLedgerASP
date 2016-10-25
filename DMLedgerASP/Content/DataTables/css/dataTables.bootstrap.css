@@ -183,3 +183,8 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:fir
 div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child {
   padding-right: 0;
 }
+table.dataTable .cellEditing input[type=text]{
+    width : 100%;
+    border : 0;
+    background-color:white;
+}

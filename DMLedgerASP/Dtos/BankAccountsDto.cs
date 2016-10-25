@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 
 namespace DMLedgerASP.Dtos
+
 {
     public class BankAccountsDto
     {
@@ -14,6 +15,6 @@ namespace DMLedgerASP.Dtos
         public string Name { get; set; }
 
         [Required]
-        public double Balance { get; set; }
+        public double? Balance { get; set; }
     }
 }

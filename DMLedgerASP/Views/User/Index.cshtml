@@ -116,7 +116,6 @@
                 ajax: {
                     url: "/api/users",
                     dataSrc: "bankAccounts",
-                    serverSide: true
                 },
                 columns: [
                     {
@@ -124,7 +123,9 @@
                     },
                     {
                         data: "balance",
-                        editField: true
+                        render: function (data) {
+                            return "<td>$" + parseFloat(data).toFixed(2) + "</td>"
+                        }
                     },
                     {
                         data: "id",
@@ -133,6 +134,25 @@
                         }
                     }
                 ]
+            }).MakeCellsEditable({
+                onUpdate: function (updatedCell, updatedColumn, id, oldValue) {
+                    console.log(updatedColumn);
+                },
+                columns: [0, 1],
+                inputTypes: [
+                    {
+                        column: 0,
+                        type: "text"
+                    },
+                    {
+                        column: 0,
+                        type: "text"
+                    }
+                ],
+                confirmationButton: {
+                    confirmCss: "btn btn-primary",
+                    cancelCss: "btn btn-default"
+                }
             });
 
 
@@ -167,6 +187,11 @@
                         }
                     }
                 ]
+            }).MakeCellsEditable({
+                onUpdte: function (updatedCell, updatedRow, oldValue) {
+                    console.log("The new value for the cell is: " + updatedCell.data());
+                    console.log("The values for each cell in that row are: " + updatedRow.data());
+                }
             });
 
             var bill_table = $("#bills").DataTable({

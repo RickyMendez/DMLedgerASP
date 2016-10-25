@@ -265,6 +265,10 @@
     <Compile Include="Migrations\201610021931020_AddNewItemTypeToModels.Designer.cs">
       <DependentUpon>201610021931020_AddNewItemTypeToModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610190226026_RemovedItemTypeFromBankAccount.cs" />
+    <Compile Include="Migrations\201610190226026_RemovedItemTypeFromBankAccount.Designer.cs">
+      <DependentUpon>201610190226026_RemovedItemTypeFromBankAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -539,6 +543,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\DataTables\dataTables.editCell.js" />
     <Content Include="Scripts\MyScripts\userServices.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -619,6 +624,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610021931020_AddNewItemTypeToModels.resx">
       <DependentUpon>201610021931020_AddNewItemTypeToModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610190226026_RemovedItemTypeFromBankAccount.resx">
+      <DependentUpon>201610190226026_RemovedItemTypeFromBankAccount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
