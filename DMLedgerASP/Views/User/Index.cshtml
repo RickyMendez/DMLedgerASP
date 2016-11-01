@@ -5,117 +5,28 @@
 
 <h2>Ledger</h2>
 
-<h3>Bank Accounts</h3>
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a data-toggle="tab" href="#bankAccountTab">Bank Accounts</a></</li>
+    <li role="presentation"><a data-toggle="tab" href="#creditCardTab">Credit Cards</a></li>
+    <li role="presentation"><a data-toggle="tab" href="#billTab">Bills</a></li>
+</ul>
 
-<!-- Add new bank account to table, start of SPA development -->
-<label>Add New Bank Account</label>
-<form class="form-inline" id="newBank">
-    <div class="form-group">
-        <label>Bank</label>
-        <input id="bankName" name="bankName" required type="text" value="" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Balance</label>
-        <input id="bankBalance" name="bankBalance" required type="text" value="" class="form-control" />
-    </div>
-    <button type="submit" id="bankSubmit" class="btn btn-primary">Add</button>
-</form><br />
-
-<!-- Bank Accounts Table -->
-<table id="accounts" class="display table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Balance</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-</table>
-
-<h3>Credit Cards</h3>
-
-<!-- Add new Credit Card to table, second table -->
-<label>Add New Creidt Card</label>
-<form class="form-inline" id="newCreditCard">
-    <div class="form-group">
-        <label>Credit Card</label>
-        <input id="creditCardName" name="creditCardName" required type="text" value="" class="form-control"/>
-    </div>
-    <div class="form-group">
-        <label>Limit</label>
-        <input id="creditCardLimit" name="creditCardLimit" type="text" value="" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Balance</label>
-        <input id="creditCardBalance" name="creditCardBalance" required type="text" value="" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Payment Amount</label>
-        <input id="creditCardPayment" name="creditCardPayment" required type="text" value="" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Due Date</label>
-        <input id="creditCardDue" name="creditCardDue" required type="text" value="" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Add</button>
-</form><br />
-
-<!-- Credit Card Table -->
-<table id="creditcards" class="display table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Limit</th>
-            <th>Balance</th>
-            <th>Payment</th>
-            <th>Due Date</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-</table>
-
-<h3>Bills</h3>
-
-<!-- Add new Bill to table, third table -->
-<label>Add New Bill</label>
-<form class="form-inline" id="newBill">
-    <div class="form-group">
-        <label>Bill</label>
-        <input id="billName" name="billName" required type="text" value="" class="form-control" />
-    </div>/>
-    <div class="form-group">
-        <label>Payment Amount</label>
-        <input id="billPayment" name="billPayment" required type="text" value="" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Due Date</label>
-        <input id="billDue" name="billDue" required type="text" value="" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Add</button>
-</form><br />
-
-<!-- Bills Table -->
-<table id="bills" class="display table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Payment</th>
-            <th>Due Date</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-</table>
+<div id="activeTable" class="tab-content">
+    <div id="bankAccountTab" class="tab-pane fade in active">@Html.Partial("_BankAccountTab")</div>
+    <div id="creditCardTab" class="tab-pane fade">@Html.Partial("_CreditCardTab")</div>
+    <div id="billTab" class="tab-pane fade">@Html.Partial("_BillTab")</div>
+</div>
 
 @section scripts
 {
     @Scripts.Render("~/bundles/services")
     <script>
         $(document).ready(function () {
-            // Generate datatables for bank accounts, credit cards, and bills
+            // Generate datatables for bank accounts
             var account_table = $("#accounts").DataTable({
                 ajax: {
                     url: "/api/users",
-                    dataSrc: "bankAccounts",
+                    dataSrc: "bankAccounts"
                 },
                 columns: [
                     {
@@ -123,6 +34,7 @@
                     },
                     {
                         data: "balance",
+                        className: "dt-body-right",
                         render: function (data) {
                             return "<td>$" + parseFloat(data).toFixed(2) + "</td>"
                         }
@@ -133,11 +45,29 @@
                             return "<button class='btn-link js-delete' data-account-id=" + data + ">Delete</button>";
                         }
                     }
-                ]
-            }).MakeCellsEditable({
-                onUpdate: function (updatedCell, updatedColumn, id, oldValue) {
-                    console.log(updatedColumn);
-                },
+                ],
+                // Displays sum of the balance column
+                footerCallback: function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                    };
+                    total = api
+                        .column(1)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    $(api.column(1).footer()).html("Total: $" + parseFloat(total).toFixed(2));
+                }
+            });
+            // target only the name and balance cells for editing api. Needs to be called after the table is created
+            account_table.MakeCellsEditable({
                 columns: [0, 1],
                 inputTypes: [
                     {
@@ -154,7 +84,30 @@
                     cancelCss: "btn btn-default"
                 }
             });
-
+            // Generate the bills table
+            var bill_table = $("#bills").DataTable({
+                ajax: {
+                    url: "/api/users",
+                    dataSrc: "bills"
+                },
+                columns: [
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "payment"
+                    },
+                    {
+                        data: "dueDate"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-bill-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
 
             var creditcard_table = $("#creditcards").DataTable({
                 ajax: {
@@ -187,49 +140,22 @@
                         }
                     }
                 ]
-            }).MakeCellsEditable({
-                onUpdte: function (updatedCell, updatedRow, oldValue) {
-                    console.log("The new value for the cell is: " + updatedCell.data());
-                    console.log("The values for each cell in that row are: " + updatedRow.data());
-                }
-            });
-
-            var bill_table = $("#bills").DataTable({
-                ajax: {
-                    url: "/api/users",
-                    dataSrc: "bills"
-                },
-                columns: [
-                    {
-                        data: "name"
-                    },
-                    {
-                        data: "payment"
-                    },
-                    {
-                        data: "dueDate"
-                    },
-                    {
-                        data: "id",
-                        render: function (data) {
-                            return "<button class='btn-link js-delete' data-bill-id=" + data + ">Delete</button>";
-                        }
-                    }
-                ]
             });
 
             // Post new bank account using jquery and ajax
-            
             var bankForm = $("#newBank").submit(function (e) {
 
                 e.preventDefault();
 
-                var bankModel = {
-                    Name: $("#newBank").find($("#bankName")).val(),
-                    Balance: $("#newBank").find($("#bankBalance")).val()
-                };
+                if (account_table ? account_table : table) {
+                    var bankModel = {
+                        Name: $("#newBank").find($("#bankName")).val(),
+                        Balance: $("#newBank").find($("#bankBalance")).val()
+                    };
 
-                addHelper("/api/BankAccounts/CreateBankAccount", bankModel, account_table, bankForm);
+                    addHelper("/api/BankAccounts/CreateBankAccount", bankModel, account_table, bankForm);
+                }
+
             });
             
             // Delete button for bank account table items
@@ -249,6 +175,7 @@
                 });
             });
 
+            // Delete button for bills table items
             $("#bills").on("click", ".js-delete", function () {
                 var button = $(this);
 
@@ -264,6 +191,8 @@
                     }
                 });
             });
+
+            // Delete button for credit cards table items
             $("#creditcards").on("click", ".js-delete", function () {
                 var button = $(this);
 
@@ -279,7 +208,7 @@
                     }
                 });
             });
-        });
+            });
     </script>
 }
 

@@ -1,0 +1,30 @@
+﻿<div class="col-lg-6">
+    <h3>Bills</h3>
+
+    <!-- Add new Bill to table, third table -->
+    <label>Add New Bill</label>
+    <form class="form-inline form-group-sm" id="newBill">
+        <div class="form-group">
+            <input id="billName" name="billName" required type="text" value="" class="form-control" placeholder="Bill name" />
+        </div>
+        <div class="form-group">
+            <input id="billPayment" name="billPayment" required type="text" value="" class="form-control" placeholder="Payment amount" />
+        </div>
+        <div class="form-group">
+            <input id="billDue" name="billDue" required type="text" value="" class="form-control" placeholder="Payment Date" />
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form><br />
+
+    <!-- Bills Table -->
+    <table id="bills" class="display table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Payment</th>
+                <th>Due Date</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+    </table>
+</div>

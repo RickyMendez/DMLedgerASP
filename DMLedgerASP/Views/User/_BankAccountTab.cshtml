@@ -1,0 +1,32 @@
+﻿<div class="col-lg-6">
+    <h3>Bank Accounts</h3>
+
+    <!-- Add new bank account to table, start of SPA development -->
+    <label>Add New Bank Account</label>
+    <form class="form-inline form-group-sm" id="newBank">
+        <div class="form-group">
+            <input id="bankName" name="bankName" required type="text" value="" class="form-control" placeholder="Bank Name" />
+        </div>
+        <div class="form-group">
+            <input id="bankBalance" name="bankBalance" required type="text" value="" class="form-control" placeholder="Balance" />
+        </div>
+        <button type="submit" id="bankSubmit" class="btn btn-primary">Add</button>
+    </form><br />
+
+    <!-- Bank Accounts Table -->
+    <table id="accounts" class="display table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Balance</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th colspan="2" style="text-align:right"></th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

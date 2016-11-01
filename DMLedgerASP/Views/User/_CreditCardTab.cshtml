@@ -1,0 +1,38 @@
+﻿<div class="col-lg-8">
+    <h3>Credit Cards</h3>
+
+    <!-- Add new Credit Card to table, second table -->
+    <label>Add New Creidt Card</label>
+    <form class="form-inline form-group-sm" id="newCreditCard">
+        <div class="form-group">
+            <input id="creditCardName" name="creditCardName" required type="text" value="" class="form-control" placeholder="Credit Card Name" />
+        </div>
+        <div class="form-group">
+            <input id="creditCardLimit" name="creditCardLimit" type="text" value="" class="form-control" placeholder="limit" />
+        </div>
+        <div class="form-group">
+            <input id="creditCardBalance" name="creditCardBalance" required type="text" value="" class="form-control" placeholder="Balance" />
+        </div>
+        <div class="form-group">
+            <input id="creditCardPayment" name="creditCardPayment" required type="text" value="" class="form-control" placeholder="Payment amount" />
+        </div>
+        <div class="form-group">
+            <input id="creditCardDue" name="creditCardDue" required type="text" value="" class="form-control" placeholder="Payment Date" />
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form><br />
+
+    <!-- Credit Card Table -->
+    <table id="creditcards" class="display table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Limit</th>
+                <th>Balance</th>
+                <th>Payment</th>
+                <th>Due Date</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+    </table>
+</div>
