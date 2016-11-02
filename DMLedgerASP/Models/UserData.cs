@@ -9,15 +9,18 @@ namespace DMLedgerASP.Models
 {
     public class UserData
     {
+        public int Id { get; set; }
+
         public IEnumerable<BankAccount> BankAccounts { get; set; }
+
 
         public IEnumerable<Bill> Bills { get; set; }
 
+
         public IEnumerable<CreditCard> CreditCards { get; set; }
 
-        public NewItemType NewItemType { get; set; }
 
-        [Display (Name = "New Item")]
-        public byte NewItemTypeId { get; set; }
+        public DateTypeList NewItemType { get; set; }
+        
     }
 }

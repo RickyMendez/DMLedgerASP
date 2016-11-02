@@ -25,28 +25,7 @@ namespace DMLedgerASP.Controllers
         // GET: user
         public ActionResult Index()
         {
-            var viewModel = new UserAccountDataViewModel()
-            {
-                NewItemTypes = _context.NewItemTypes
-            };
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public ActionResult AddNew(UserData userData)
-        {
-            switch (userData.NewItemTypeId)
-            {
-                case 1:
-                    return RedirectToAction("BankAccountForm", "BankAccount");
-                case 2:
-                    return RedirectToAction("BillForm", "Bill");
-                case 3:
-                    return RedirectToAction("CreditCardForm", "CreditCard");
-                default:
-                    break;
-            }
-            return View();
+            return View(new UserAccountDataViewModel());
         }
     }
 }

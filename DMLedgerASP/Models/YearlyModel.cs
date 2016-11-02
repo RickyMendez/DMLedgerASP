@@ -5,9 +5,9 @@ using System.Web;
 
 namespace DMLedgerASP.Models
 {
-    public class NewItemType
+    public class YearlyModel
     {
         public byte Id { get; set; }
-        public string ItemName { get; set; }
+        public string MonthDue { get; set; }
     }
 }

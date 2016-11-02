@@ -8,7 +8,7 @@ namespace DMLedgerASP.ViewModels
 {
     public class UserAccountDataViewModel
     {
-        public IEnumerable<NewItemType> NewItemTypes { get; set; }
+        public IEnumerable<DateTypeList> NewItemTypes { get; set; }
         public UserData UserData { get; set; }
 
         public IEnumerable<Bill> Bills { get; set; }

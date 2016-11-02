@@ -27,8 +27,6 @@ namespace DMLedgerASP.Models
 
         public DbSet<Bill> Bills { get; set; }
 
-        public DbSet<NewItemType> NewItemTypes { get; set; }
-
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

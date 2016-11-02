@@ -1,12 +1,7 @@
-﻿
-@{
-    ViewBag.Title = "User";
-}
-
-<h2>Ledger</h2>
+﻿<h2>Ledger</h2>
 
 <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a data-toggle="tab" href="#bankAccountTab">Bank Accounts</a></</li>
+    <li role="presentation"><a data-toggle="tab" href="#bankAccountTab">Bank Accounts</a></</li>
     <li role="presentation"><a data-toggle="tab" href="#creditCardTab">Credit Cards</a></li>
     <li role="presentation"><a data-toggle="tab" href="#billTab">Bills</a></li>
 </ul>
@@ -75,7 +70,7 @@
                         type: "text"
                     },
                     {
-                        column: 0,
+                        column: 1,
                         type: "text"
                     }
                 ],
@@ -84,6 +79,7 @@
                     cancelCss: "btn btn-default"
                 }
             });
+
             // Generate the bills table
             var bill_table = $("#bills").DataTable({
                 ajax: {
@@ -95,7 +91,11 @@
                         data: "name"
                     },
                     {
-                        data: "payment"
+                        data: "balance",
+                        className: "dt-body-right",
+                        render: function (data) {
+                            return "<td>$" + parseFloat(data).toFixed(2) + "</td>"
+                        }
                     },
                     {
                         data: "dueDate"
@@ -106,10 +106,52 @@
                             return "<button class='btn-link js-delete' data-bill-id=" + data + ">Delete</button>";
                         }
                     }
-                ]
+                ],
+                // Displays sum of the balance column
+                footerCallback: function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                    };
+                    total = api
+                        .column(1)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    $(api.column(1).footer()).html("Total: $" + parseFloat(total).toFixed(2));
+                }
+            });
+            // Target only the name, balance, and date to be editable
+            bill_table.MakeCellsEditable({
+                columns: [0, 1, 2],
+                inputTypes: [
+                    {
+                        column: 0,
+                        type: "text"
+                    },
+                    {
+                        column: 1,
+                        type: "text"
+                    },
+                    {
+                        column: 2,
+                        type: "text"
+                    }
+                ],
+                confirmationButton: {
+                    confirmCss: "btn btn-primary",
+                    cancelCss: "btn btn-default"
+                }
             });
 
-            var creditcard_table = $("#creditcards").DataTable({
+            // Generate Credit Cards table
+            var creditCard_table = $("#creditcards").DataTable({
                 ajax: {
                     url: "/api/users",
                     dataSrc: "creditCards"
@@ -119,19 +161,28 @@
                         data: "name"
                     },
                     {
-                        data: "limit"
+                        data: "limit",
+                        className: "dt-body-right",
+                        render: function (data) {
+                            return "<td>$" + parseFloat(data).toFixed(2) + "</td>"
+                        }
                     },
                     {
                         data: "balance",
-                        editField: true
+                        className: "dt-body-right",
+                        render: function (data) {
+                            return "<td>$" + parseFloat(data).toFixed(2) + "</td>"
+                        }
                     },
                     {
                         data: "payment",
-                        editField: true
+                        className: "dt-body-right",
+                        render: function (data) {
+                            return "<td>$" + parseFloat(data).toFixed(2) + "</td>"
+                        }
                     },
                     {
-                        data: "dueDate",
-                        editField: true
+                        data: "dueDate"
                     },
                     {
                         data: "id",
@@ -140,6 +191,36 @@
                         }
                     }
                 ]
+            });
+
+            creditCard_table.MakeCellsEditable({
+                columns: [0, 1, 2, 3, 4],
+                inputTypes: [
+                    {
+                        column: 0,
+                        type: "text"
+                    },
+                    {
+                        column: 1,
+                        type: "text"
+                    },
+                    {
+                        column: 2,
+                        type: "text"
+                    },
+                    {
+                        column: 3,
+                        type: "text"
+                    },
+                    {
+                        column: 4,
+                        type: "text"
+                    }
+                ],
+                confirmationButton: {
+                    confirmCss: "btn btn-primary",
+                    cancelCss: "btn btn-default"
+                }
             });
 
             // Post new bank account using jquery and ajax
@@ -157,22 +238,41 @@
                 }
 
             });
-            
-            // Delete button for bank account table items
-            $("#accounts").on("click", ".js-delete", function () {
-                var button = $(this);
 
-                bootbox.confirm("Are you sure that you want to delete this entry?", function (result) {
-                    if (result) {
-                        $.ajax({
-                            url: "/api/bankaccounts/" + button.attr("data-account-id"),
-                            method: "DELETE",
-                            success: function () {
-                                account_table.row(button.parents("tr")).remove().draw();
-                            }
-                        });
-                    }
-                });
+            // Post new bill using jquery and ajax
+            var billForm = $("#newBill").submit(function (e) {
+
+                e.preventDefault();
+
+                if (bill_table ? bill_table : table) {
+                    var billModel = {
+                        Name: $("#newBill").find($("#billName")).val(),
+                        Balance: $("#newBill").find($("#billPayment")).val(),
+                        DueDate: $("#newBill").find($("#billDue")).val()
+                    };
+
+                    addHelper("/api/Bills/CreateBill", billModel, bill_table, billForm);
+                }
+
+            });
+
+            // Post new credit card using jquery and ajax
+            var creditCardForm = $("#newCreditCard").submit(function (e) {
+
+                e.preventDefault();
+
+                if (creditCard_table ? creditCard_table : table) {
+                    var creditCardModel = {
+                        Name: $("#newCreditCard").find($("#creditCardName")).val(),
+                        Limit: $("#newCreditCard").find($("#creditCardLimit")).val(),
+                        Balance: $("#newCreditCard").find($("#creditCardBalance")).val(),
+                        Payment: $("#newCreditCard").find($("#creditCardPayment")).val(),
+                        DueDate: $("#newCreditCard").find($("#creditCardDue")).val()
+                    };
+
+                    addHelper("/api/CreditCards/CreateCreditCard", creditCardModel, creditCard_table, creditCardForm);
+                }
+
             });
 
             // Delete button for bills table items
@@ -192,6 +292,23 @@
                 });
             });
 
+            // Delete button for bank account table items
+            $("#accounts").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure that you want to delete this entry?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/bankaccounts/" + button.attr("data-account-id"),
+                            method: "DELETE",
+                            success: function () {
+                                account_table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+
             // Delete button for credit cards table items
             $("#creditcards").on("click", ".js-delete", function () {
                 var button = $(this);
@@ -202,13 +319,13 @@
                             url: "/api/creditcards/" + button.attr("data-creditcard-id"),
                             method: "DELETE",
                             success: function () {
-                                creditcard_table.row(button.parents("tr")).remove().draw();
+                                creditCard_table.row(button.parents("tr")).remove().draw();
                             }
                         });
                     }
                 });
             });
-            });
+        });
     </script>
 }
 

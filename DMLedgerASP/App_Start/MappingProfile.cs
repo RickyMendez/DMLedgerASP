@@ -24,8 +24,8 @@ namespace DMLedgerASP.App_Start
             CreateMap<UserData, UsersDataDto>();
             CreateMap<UsersDataDto, UserData>();
 
-            CreateMap<NewItemType, NewItemTypesDto>();
-            CreateMap<NewItemTypesDto, NewItemType>();
+            CreateMap<DateTypeList, NewItemTypesDto>();
+            CreateMap<NewItemTypesDto, DateTypeList>();
         }
     }
 }

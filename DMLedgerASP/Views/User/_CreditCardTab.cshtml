@@ -1,4 +1,4 @@
-﻿<div class="col-lg-8">
+﻿<div class="col-lg-6">
     <h3>Credit Cards</h3>
 
     <!-- Add new Credit Card to table, second table -->
@@ -19,7 +19,7 @@
         <div class="form-group">
             <input id="creditCardDue" name="creditCardDue" required type="text" value="" class="form-control" placeholder="Payment Date" />
         </div>
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" id="creditCardSubmit" class="btn btn-primary">Add</button>
     </form><br />
 
     <!-- Credit Card Table -->
@@ -34,5 +34,11 @@
                 <th>Delete</th>
             </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <th colspan="4" style="text-align:right"></th>
+                <th colspan="2"></th>
+            </tr>
+        </tfoot>
     </table>
 </div>

@@ -3,6 +3,7 @@
     .done(function () {
         toastr.success("Added successfully!");
         form.find("input:text").val("");
+        form.find("input:date").val("");
         table.ajax.reload();
     })
     .fail(function () {

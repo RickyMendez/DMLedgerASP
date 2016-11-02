@@ -13,8 +13,8 @@ namespace DMLedgerASP.Models
 
         public double Balance { get; set; }
 
-        public string DueDate { get; set; }
-        
-        public byte NewItemTypeId { get; set; }
+        public DateTypeModel DateTypeModel { get; set; }
+
+        public byte DateTypeId { get; set; }
     }
 }
