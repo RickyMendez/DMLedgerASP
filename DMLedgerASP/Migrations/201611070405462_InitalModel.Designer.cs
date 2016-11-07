@@ -7,13 +7,13 @@ namespace DMLedgerASP.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddDateTypeToBillAndCreditCard : IMigrationMetadata
+    public sealed partial class InitalModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddDateTypeToBillAndCreditCard));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitalModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611021454173_AddDateTypeToBillAndCreditCard"; }
+            get { return "201611070405462_InitalModel"; }
         }
         
         string IMigrationMetadata.Source

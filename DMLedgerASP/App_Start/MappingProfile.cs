@@ -20,12 +20,6 @@ namespace DMLedgerASP.App_Start
 
             CreateMap<CreditCard, CreditCardsDto>();
             CreateMap<CreditCardsDto, CreditCard>();
-
-            CreateMap<UserData, UsersDataDto>();
-            CreateMap<UsersDataDto, UserData>();
-
-            CreateMap<DateTypeList, NewItemTypesDto>();
-            CreateMap<NewItemTypesDto, DateTypeList>();
         }
     }
 }

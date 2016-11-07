@@ -20,8 +20,8 @@
             // Generate datatables for bank accounts
             var account_table = $("#accounts").DataTable({
                 ajax: {
-                    url: "/api/users",
-                    dataSrc: "bankAccounts"
+                    url: "/api/bankaccounts",
+                    dataSrc: ""
                 },
                 columns: [
                     {
@@ -75,16 +75,17 @@
                     }
                 ],
                 confirmationButton: {
-                    confirmCss: "btn btn-primary",
-                    cancelCss: "btn btn-default"
+                    confirmCss: "btn btn-primary btn-sm",
+                    cancelCss: "btn btn-default btn-sm"
                 }
             });
+            //console.log(account_table);
 
             // Generate the bills table
             var bill_table = $("#bills").DataTable({
                 ajax: {
-                    url: "/api/users",
-                    dataSrc: "bills"
+                    url: "/api/bills",
+                    dataSrc: ""
                 },
                 columns: [
                     {
@@ -145,16 +146,17 @@
                     }
                 ],
                 confirmationButton: {
-                    confirmCss: "btn btn-primary",
-                    cancelCss: "btn btn-default"
+                    confirmCss: "btn btn-primary btn-sm",
+                    cancelCss: "btn btn-default btn-sm"
                 }
             });
+            //console.log(bill_table);
 
             // Generate Credit Cards table
             var creditCard_table = $("#creditcards").DataTable({
                 ajax: {
-                    url: "/api/users",
-                    dataSrc: "creditCards"
+                    url: "/api/creditcards",
+                    dataSrc: ""
                 },
                 columns: [
                     {
@@ -218,10 +220,11 @@
                     }
                 ],
                 confirmationButton: {
-                    confirmCss: "btn btn-primary",
-                    cancelCss: "btn btn-default"
+                    confirmCss: "btn btn-primary btn-sm",
+                    cancelCss: "btn btn-default btn-sm"
                 }
             });
+            console.log(creditCard_table);
 
             // Post new bank account using jquery and ajax
             var bankForm = $("#newBank").submit(function (e) {

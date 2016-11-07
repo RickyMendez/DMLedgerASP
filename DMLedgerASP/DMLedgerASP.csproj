@@ -216,8 +216,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\BankAccountsController.cs" />
     <Compile Include="Controllers\Api\BillsController.cs" />
-    <Compile Include="Controllers\Api\CrediCardsController.cs" />
-    <Compile Include="Controllers\Api\UsersController.cs" />
+    <Compile Include="Controllers\Api\CreditCardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -229,66 +228,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609182119128_InitialModels.cs" />
-    <Compile Include="Migrations\201609182119128_InitialModels.Designer.cs">
-      <DependentUpon>201609182119128_InitialModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609220338560_AddBankAccountDbSet.cs" />
-    <Compile Include="Migrations\201609220338560_AddBankAccountDbSet.Designer.cs">
-      <DependentUpon>201609220338560_AddBankAccountDbSet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609220342442_AddCreditCardsDbSet.cs" />
-    <Compile Include="Migrations\201609220342442_AddCreditCardsDbSet.Designer.cs">
-      <DependentUpon>201609220342442_AddCreditCardsDbSet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609220344304_AddBillsDbSet.cs" />
-    <Compile Include="Migrations\201609220344304_AddBillsDbSet.Designer.cs">
-      <DependentUpon>201609220344304_AddBillsDbSet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609240154195_RemoveBankAccountDueDate.cs" />
-    <Compile Include="Migrations\201609240154195_RemoveBankAccountDueDate.Designer.cs">
-      <DependentUpon>201609240154195_RemoveBankAccountDueDate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609242105093_AddNewItemTypes.cs" />
-    <Compile Include="Migrations\201609242105093_AddNewItemTypes.Designer.cs">
-      <DependentUpon>201609242105093_AddNewItemTypes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609242106305_PopulateNewItemTypes.cs" />
-    <Compile Include="Migrations\201609242106305_PopulateNewItemTypes.Designer.cs">
-      <DependentUpon>201609242106305_PopulateNewItemTypes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610021931020_AddNewItemTypeToModels.cs" />
-    <Compile Include="Migrations\201610021931020_AddNewItemTypeToModels.Designer.cs">
-      <DependentUpon>201610021931020_AddNewItemTypeToModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610190226026_RemovedItemTypeFromBankAccount.cs" />
-    <Compile Include="Migrations\201610190226026_RemovedItemTypeFromBankAccount.Designer.cs">
-      <DependentUpon>201610190226026_RemovedItemTypeFromBankAccount.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611021454173_AddDateTypeToBillAndCreditCard.cs" />
-    <Compile Include="Migrations\201611021454173_AddDateTypeToBillAndCreditCard.Designer.cs">
-      <DependentUpon>201611021454173_AddDateTypeToBillAndCreditCard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611021637568_ChangeNewItemTypeToDateType.cs" />
-    <Compile Include="Migrations\201611021637568_ChangeNewItemTypeToDateType.Designer.cs">
-      <DependentUpon>201611021637568_ChangeNewItemTypeToDateType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611021656469_RemovedNewItemTypeIdFromUserData.cs" />
-    <Compile Include="Migrations\201611021656469_RemovedNewItemTypeIdFromUserData.Designer.cs">
-      <DependentUpon>201611021656469_RemovedNewItemTypeIdFromUserData.cs</DependentUpon>
+    <Compile Include="Migrations\201611070405462_InitalModel.cs" />
+    <Compile Include="Migrations\201611070405462_InitalModel.Designer.cs">
+      <DependentUpon>201611070405462_InitalModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\CreditCard.cs" />
-    <Compile Include="Models\DateTypeList.cs" />
-    <Compile Include="Models\DateTypeModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MonthlyModel.cs" />
-    <Compile Include="Models\UserData.cs" />
-    <Compile Include="Models\YearlyModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\UserAccountDataViewModel.cs" />
@@ -620,45 +570,12 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609182119128_InitialModels.resx">
-      <DependentUpon>201609182119128_InitialModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609220338560_AddBankAccountDbSet.resx">
-      <DependentUpon>201609220338560_AddBankAccountDbSet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609220342442_AddCreditCardsDbSet.resx">
-      <DependentUpon>201609220342442_AddCreditCardsDbSet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609220344304_AddBillsDbSet.resx">
-      <DependentUpon>201609220344304_AddBillsDbSet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609240154195_RemoveBankAccountDueDate.resx">
-      <DependentUpon>201609240154195_RemoveBankAccountDueDate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609242105093_AddNewItemTypes.resx">
-      <DependentUpon>201609242105093_AddNewItemTypes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609242106305_PopulateNewItemTypes.resx">
-      <DependentUpon>201609242106305_PopulateNewItemTypes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610021931020_AddNewItemTypeToModels.resx">
-      <DependentUpon>201610021931020_AddNewItemTypeToModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610190226026_RemovedItemTypeFromBankAccount.resx">
-      <DependentUpon>201610190226026_RemovedItemTypeFromBankAccount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611021454173_AddDateTypeToBillAndCreditCard.resx">
-      <DependentUpon>201611021454173_AddDateTypeToBillAndCreditCard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611021637568_ChangeNewItemTypeToDateType.resx">
-      <DependentUpon>201611021637568_ChangeNewItemTypeToDateType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611021656469_RemovedNewItemTypeIdFromUserData.resx">
-      <DependentUpon>201611021656469_RemovedNewItemTypeIdFromUserData.cs</DependentUpon>
-    </EmbeddedResource>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <EmbeddedResource Include="Migrations\201611070405462_InitalModel.resx">
+      <DependentUpon>201611070405462_InitalModel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

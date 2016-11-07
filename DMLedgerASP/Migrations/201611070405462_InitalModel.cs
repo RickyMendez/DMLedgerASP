@@ -3,10 +3,43 @@ namespace DMLedgerASP.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialModels : DbMigration
+    public partial class InitalModel : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.BankAccounts",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        Balance = c.Double(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Bills",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Balance = c.Double(nullable: false),
+                        DueDate = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.CreditCards",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        Limit = c.Double(nullable: false),
+                        Balance = c.Double(nullable: false),
+                        DueDate = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -94,6 +127,9 @@ namespace DMLedgerASP.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.CreditCards");
+            DropTable("dbo.Bills");
+            DropTable("dbo.BankAccounts");
         }
     }
 }

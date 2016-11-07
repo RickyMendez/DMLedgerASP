@@ -67,17 +67,23 @@ jQuery.fn.dataTable.Api.register('MakeCellsEditable()', function (settings) {
                 var oldValue = cell.data();
                 cell.data(newValue);
                 var url = "/api/";
+
                 //console.log(table.node().id);
                 switch (table.node().id) {
                     case "accounts":
-                        url += "bankaccounts/" + table.data()[0].id;
+                        url += "bankaccounts/" + row.data().id;
+                        break;
+                    case "bills":
+                        url += "bills/" + row.data().id;
+                        break;
+                    case "creditCards":
+                        url += "creditcards/" + row.data().id;
                         break;
                     default:
                         break;
                 }
                 //console.log(url)
-
-                editBankHelper(url, row.data(), columnIndex, table);
+                editHelper(url, row.data(), table);
             }
             // Get current page
             var currentPageIndex = table.page.info().page;
@@ -154,6 +160,7 @@ function getInputHtml(currentColumnIndex, settings, oldValue) {
         cancelCss = settings.confirmationButton.cancelCss;
         inputType = inputType + "-confirm";
     }
+
     switch (inputType) {
         case "list":
             input.html = "<select class='" + inputCss + "' onchange='$(this).updateEditableCell(this);'>";
@@ -197,10 +204,15 @@ function getInputHtml(currentColumnIndex, settings, oldValue) {
             }, 100);
             break;
         case "text-confirm": // text input w/ confirm
-            input.html = "<input id='ejbeatycelledit' class='" + inputCss + "' value='" + oldValue + "'></input>&nbsp;<a href='#' id='updateLink' class='" + confirmCss + "' onclick='$(this).updateEditableCell(this)'>Update</a> <a href='#' id='cancelLink' class='" + cancelCss + "' onclick='$(this).cancelEditableCell(this)'>Cancel</a> ";
+            input.html = "<input id='ejbeatycelledit' class='" + inputCss + "' value='" + oldValue + "'></input>&nbsp;\
+                <a href='#' id='updateLink' class='" + confirmCss + "' onclick='$(this).updateEditableCell(this)'>Update</a>\
+                <a href='#' id='cancelLink' class='" + cancelCss + "' onclick='$(this).cancelEditableCell(this)'>Cancel</a> ";
             break;
         case "undefined-confirm": // text input w/ confirm
-            input.html = "<input id='ejbeatycelledit' class='" + inputCss + "' value='" + oldValue + "'></input>&nbsp;<a href='#' id='updateLink' class='" + confirmCss + "' onclick='$(this).updateEditableCell(this)'>Update</a> <a href='#' id='cancelLink' class='" + cancelCss + "' onclick='$(this).cancelEditableCell(this)'>Cancel</a> ";
+            input.html = "<input id='ejbeatycelledit' class='" + inputCss + "' value='" + oldValue + "'></input>&nbsp;\
+                <a href='#' id='updateLink' class='" + confirmCss + "' onclick='$(this).updateEditableCell(this)'>Update</a>\
+                <a href='#' id='cancelLink' class='" + cancelCss + "' onclick='$(this).cancelEditableCell(this)'>Cancel</a> ";
+            
             break;
         default: // text input
             input.html = "<input id='ejbeatycelledit' class='" + inputCss + "' onfocusout='$(this).updateEditableCell(this)' value='" + oldValue + "'></input>";

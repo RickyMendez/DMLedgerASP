@@ -8,11 +8,12 @@ namespace DMLedgerASP.ViewModels
 {
     public class UserAccountDataViewModel
     {
-        public IEnumerable<DateTypeList> NewItemTypes { get; set; }
-        public UserData UserData { get; set; }
+        public IEnumerable<BankAccount> BankAccounts { get; set; }
+
 
         public IEnumerable<Bill> Bills { get; set; }
-        public IEnumerable<BankAccount> BankAccounts { get; set; }
+
+
         public IEnumerable<CreditCard> CreditCards { get; set; }
     }
 }

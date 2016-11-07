@@ -10,12 +10,12 @@ using AutoMapper;
 
 namespace DMLedgerASP.Controllers.Api
 {
-    public class CrediCardsController : ApiController
+    public class CreditCardsController : ApiController
     {
 
         private ApplicationDbContext _context;
 
-        public CrediCardsController()
+        public CreditCardsController()
         {
             _context = new ApplicationDbContext();
         }

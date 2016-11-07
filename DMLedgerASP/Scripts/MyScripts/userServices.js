@@ -2,8 +2,8 @@
     $.post(url, model)
     .done(function () {
         toastr.success("Added successfully!");
-        form.find("input:text").val("");
-        form.find("input:date").val("");
+        form.find("input[type=text]").val("");
+        form.find("input[type=date]").val("");
         table.ajax.reload();
     })
     .fail(function () {
