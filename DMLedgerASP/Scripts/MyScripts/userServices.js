@@ -23,3 +23,19 @@ function editHelper(url, model, table) {
         toastr.error("Something went wrong!")
     });
 }
+function colTotalHelper (api, col) {
+    var intVal = function (i) {
+        return typeof i === 'string' ?
+            i.replace(/[\$,]/g, '') * 1 :
+            typeof i === 'number' ?
+            i : 0;
+    };
+    total = api
+        .column(col)
+        .data()
+        .reduce(function (a, b) {
+            return intVal(a) + intVal(b);
+        }, 0);
+
+    return total;
+};

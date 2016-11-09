@@ -5,25 +5,33 @@
     <label>Add New Creidt Card</label>
     <form class="form-inline form-group-sm" id="newCreditCard">
         <div class="form-group">
+            <label>Credit Card Name</label><br />
             <input id="creditCardName" name="creditCardName" required type="text" value="" class="form-control" placeholder="Credit Card Name" />
         </div>
         <div class="form-group">
+            <label>Limit</label><br />
             <input id="creditCardLimit" name="creditCardLimit" type="text" value="" class="form-control" placeholder="limit" />
         </div>
         <div class="form-group">
+            <label>Balance</label><br />
             <input id="creditCardBalance" name="creditCardBalance" required type="text" value="" class="form-control" placeholder="Balance" />
         </div>
         <div class="form-group">
+            <label>Payment</label><br />
             <input id="creditCardPayment" name="creditCardPayment" required type="text" value="" class="form-control" placeholder="Payment amount" />
         </div>
         <div class="form-group">
+            <label>Due Date</label><br />
             <input id="creditCardDue" name="creditCardDue" required type="date" value="" class="form-control" placeholder="Payment Date" />
         </div>
-        <button type="submit" id="creditCardSubmit" class="btn btn-primary">Add</button>
+        <div class="form-group">
+            <label hidden>Add Button</label><br />
+            <button type="submit" id="creditCardSubmit" class="btn btn-primary btn-sm">Add</button>
+        </div>
     </form><br />
 
     <!-- Credit Card Table -->
-    <table id="creditcards" class="display table table-bordered table-hover">
+    <table id="creditcards" class="display table table-bordered table-hover" width="100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -36,7 +44,10 @@
         </thead>
         <tfoot>
             <tr>
-                <th colspan="4" style="text-align:right"></th>
+                <th>Totals: </th>
+                <th style="text-align:right" id="limitTotal"></th>
+                <th style="text-align:right" id="creditTotal"></th>
+                <th style="text-align:right" id="creditDebt"></th>
                 <th colspan="2"></th>
             </tr>
         </tfoot>

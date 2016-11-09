@@ -13,9 +13,11 @@ namespace DMLedgerASP.Models
         [Required]
         public string Name { get; set; }
 
-        public double Limit { get; set; }
+        public float Limit { get; set; }
 
-        public double Balance { get; set; }
+        public float Balance { get; set; }
+
+        public float Payment { get; set; }
 
         public string DueDate { get; set; }
     }

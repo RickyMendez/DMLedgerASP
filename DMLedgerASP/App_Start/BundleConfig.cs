@@ -15,6 +15,7 @@ namespace DMLedgerASP
                         "~/Scripts/respond.js",
                         "~/Scripts/DataTables-1.10.12/media/js/jquery.dataTables.js",
                         "~/Scripts/DataTables-1.10.12/media/js/dataTables.bootstrap.js",
+                        "~/Scripts/jquery-ui-{version}.js",
                         "~/Scripts/toastr.js"));
 
 

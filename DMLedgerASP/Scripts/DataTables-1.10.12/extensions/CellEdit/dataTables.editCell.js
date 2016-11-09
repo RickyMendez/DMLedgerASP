@@ -76,7 +76,7 @@ jQuery.fn.dataTable.Api.register('MakeCellsEditable()', function (settings) {
                     case "bills":
                         url += "bills/" + row.data().id;
                         break;
-                    case "creditCards":
+                    case "creditcards":
                         url += "creditcards/" + row.data().id;
                         break;
                     default:

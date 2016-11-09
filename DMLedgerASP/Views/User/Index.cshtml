@@ -1,22 +1,40 @@
 ﻿<h2>Ledger</h2>
-
-<ul class="nav nav-tabs">
-    <li role="presentation"><a data-toggle="tab" href="#bankAccountTab">Bank Accounts</a></</li>
-    <li role="presentation"><a data-toggle="tab" href="#creditCardTab">Credit Cards</a></li>
-    <li role="presentation"><a data-toggle="tab" href="#billTab">Bills</a></li>
-</ul>
-
-<div id="activeTable" class="tab-content">
-    <div id="bankAccountTab" class="tab-pane fade in active">@Html.Partial("_BankAccountTab")</div>
-    <div id="creditCardTab" class="tab-pane fade">@Html.Partial("_CreditCardTab")</div>
-    <div id="billTab" class="tab-pane fade">@Html.Partial("_BillTab")</div>
+<div class="row">
+    <div col-lg-4">
+        <ul class="list-group col-lg-2">
+            <li id="available-total" class="list-group-item list-group-item-success"></li>
+            <li id="debt-total" class="list-group-item list-group-item-danger"></li>
+        </ul>
+    </div>
 </div>
+
+<div class="row">
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a data-toggle="tab" href="#bankAccountTab">Bank Accounts</a></</li>
+        <li role="presentation"><a data-toggle="tab" href="#creditCardTab">Credit Cards</a></li>
+        <li role="presentation"><a data-toggle="tab" href="#billTab">Bills</a></li>
+    </ul>
+    <div id="activeTable" class="tab-content">
+        <div id="bankAccountTab" class="tab-pane fade in active">@Html.Partial("_BankAccountTab")</div>
+        <div id="creditCardTab" class="tab-pane fade">@Html.Partial("_CreditCardTab")</div>
+        <div id="billTab" class="tab-pane fade">@Html.Partial("_BillTab")</div>
+    </div>
+</div>
+
 
 @section scripts
 {
     @Scripts.Render("~/bundles/services")
     <script>
         $(document).ready(function () {
+            var availableTotal = 0;
+            var debtTotal = 0;
+
+            var bankColTotal = 0,
+                billColTotal = 0,
+                creditcardColTotal = 0,
+                creditcardDebtTotal = 0;
+
             // Generate datatables for bank accounts
             var account_table = $("#accounts").DataTable({
                 ajax: {
@@ -45,20 +63,26 @@
                 footerCallback: function (row, data, start, end, display) {
                     var api = this.api(), data;
 
-                    var intVal = function (i) {
-                        return typeof i === 'string' ?
-                            i.replace(/[\$,]/g, '') * 1 :
-                            typeof i === 'number' ?
-                            i : 0;
-                    };
-                    total = api
-                        .column(1)
-                        .data()
-                        .reduce(function (a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
+                    total = colTotalHelper(api, 1);
 
-                    $(api.column(1).footer()).html("Total: $" + parseFloat(total).toFixed(2));
+                    $(api.column(1).footer()).html("$" + parseFloat(total).toFixed(2));
+                },
+                drawCallback: function (row, data, start, end, display) {
+                    var api = this.api(), data;
+                    
+                    bankColTotal = colTotalHelper(api, 1);
+
+                    availableTotal = (bankColTotal + creditcardColTotal) - debtTotal;
+
+                    if (availableTotal < 0) {
+                        $("#available-total").removeClass("list-group-item-success list-group-item-warning").addClass("list-group-item-danger");
+                    } else if (availableTotal == 0) {
+                        $("#available-total").removeClass("list-group-item-success list-group-item-danger").addClass("list-group-item-warning");
+                    } else if (availableTotal > 0) {
+                        $("#available-total").removeClass("list-group-item-warning list-group-item-danger").addClass("list-group-item-success");
+                    }
+
+                    $("#available-total").html("$" + parseFloat(availableTotal).toFixed(2) + " Available");
                 }
             });
             // target only the name and balance cells for editing api. Needs to be called after the table is created
@@ -92,7 +116,7 @@
                         data: "name"
                     },
                     {
-                        data: "balance",
+                        data: "payment",
                         className: "dt-body-right",
                         render: function (data) {
                             return "<td>$" + parseFloat(data).toFixed(2) + "</td>"
@@ -108,24 +132,32 @@
                         }
                     }
                 ],
-                // Displays sum of the balance column
+                // Displays sum of the payment column
                 footerCallback: function (row, data, start, end, display) {
                     var api = this.api(), data;
 
-                    var intVal = function (i) {
-                        return typeof i === 'string' ?
-                            i.replace(/[\$,]/g, '') * 1 :
-                            typeof i === 'number' ?
-                            i : 0;
-                    };
-                    total = api
-                        .column(1)
-                        .data()
-                        .reduce(function (a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
+                    total = colTotalHelper(api, 1);
 
-                    $(api.column(1).footer()).html("Total: $" + parseFloat(total).toFixed(2));
+                    $(api.column(1).footer()).html("$" + parseFloat(total).toFixed(2));
+                },
+                drawCallback: function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    billColTotal = colTotalHelper(api, 1);
+
+                    debtTotal = billColTotal + creditcardDebtTotal;
+
+                    availableTotal = (bankColTotal + creditcardColTotal) - debtTotal;
+
+                    $("#debt-total").html("$" + parseFloat(debtTotal).toFixed(2) + " Total Debt");
+
+                    if (availableTotal < 0) {
+                        $("#available-total").removeClass("list-group-item-success list-group-item-warning").addClass("list-group-item-danger");
+                    } else if (availableTotal == 0) {
+                        $("#available-total").removeClass("list-group-item-success list-group-item-danger").addClass("list-group-item-warning");
+                    } else if (availableTotal > 0) {
+                        $("#available-total").removeClass("list-group-item-warning list-group-item-danger").addClass("list-group-item-success");
+                    }
                 }
             });
             // Target only the name, balance, and date to be editable
@@ -142,7 +174,7 @@
                     },
                     {
                         column: 2,
-                        type: "text"
+                        type: "datepicker"
                     }
                 ],
                 confirmationButton: {
@@ -192,7 +224,45 @@
                             return "<button class='btn-link js-delete' data-creditcard-id=" + data + ">Delete</button>";
                         }
                     }
-                ]
+                ],
+                // Displays sum of the payment column
+                footerCallback: function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    totalBal = colTotalHelper(api, 2);
+
+                    totalLimit = colTotalHelper(api, 1);
+
+                    totalPay = colTotalHelper(api, 3)
+
+                    $(api.column(1).footer()).html("$" + parseFloat(totalLimit).toFixed(2));
+                    $(api.column(2).footer()).html("$" + parseFloat(totalBal).toFixed(2));
+                    $(api.column(3).footer()).html("$" + parseFloat(totalPay).toFixed(2));
+                    
+                },
+                drawCallback: function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    creditcardColTotal = colTotalHelper(api, 2);
+
+                    creditcardDebtTotal = colTotalHelper(api, 3) - creditcardColTotal;
+
+                    availableTotal = (bankColTotal + creditcardColTotal) - debtTotal;
+
+                    debtTotal = billColTotal + creditcardDebtTotal;
+
+                    if (availableTotal < 0) {
+                        $("#available-total").removeClass("list-group-item-success list-group-item-warning").addClass("list-group-item-danger");
+                    } else if (availableTotal === 0) {
+                        $("#available-total").removeClass("list-group-item-success list-group-item-danger").addClass("list-group-item-warning");
+                    } else if (availableTotal > 0) {
+                        $("#available-total").removeClass("list-group-item-warning list-group-item-danger").addClass("list-group-item-success");
+                    }
+
+                    $("#available-total").html("$" + parseFloat(availableTotal).toFixed(2) + " Available");
+
+                    $("#debt-total").html("$" + parseFloat(debtTotal).toFixed(2) + " Total Debt");
+                }
             });
 
             creditCard_table.MakeCellsEditable({
@@ -216,7 +286,7 @@
                     },
                     {
                         column: 4,
-                        type: "text"
+                        type: "datepicker"
                     }
                 ],
                 confirmationButton: {
@@ -224,7 +294,11 @@
                     cancelCss: "btn btn-default btn-sm"
                 }
             });
-            console.log(creditCard_table);
+            //console.log(creditCard_table);
+
+            $(".table").change(function () {
+                console.log("A table has changed");
+            });
 
             // Post new bank account using jquery and ajax
             var bankForm = $("#newBank").submit(function (e) {
@@ -250,7 +324,7 @@
                 if (bill_table ? bill_table : table) {
                     var billModel = {
                         Name: $("#newBill").find($("#billName")).val(),
-                        Balance: $("#newBill").find($("#billPayment")).val(),
+                        Payment: $("#newBill").find($("#billPayment")).val(),
                         DueDate: $("#newBill").find($("#billDue")).val()
                     };
 
